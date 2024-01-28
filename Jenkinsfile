@@ -1,7 +1,7 @@
 pipeline {
   agent any
   options {
-skipStagesAfterUnstable()
+    skipStagesAfterUnstable()
 }
   stages {
     stage('Build') {
@@ -9,12 +9,12 @@ skipStagesAfterUnstable()
         sh '/opt/apache-maven-3.9.6/bin/mvn -B -DskipTests clean package'
       }
     }
-stage('Test') {
-  steps {
-    sh '/opt/apache-maven-3.9.6/bin/mvn test'
-}
-post {
-  always {
+    stage('Test') {
+      steps {
+         sh '/opt/apache-maven-3.9.6/bin/mvn test'
+        }
+        post {
+         always {
           junit 'target/surefire-reports/*.xml'
         }
       }
